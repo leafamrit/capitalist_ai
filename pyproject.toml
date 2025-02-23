@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "capitalist_ai"
+version = "0.1.0"
+authors = [
+  { name="Your Name", email="your.email@example.com" },
+]
+description = "AI-powered business analysis and strategy"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "crewai",
+    "crewai_tools",
+    "pymongo",
+    "fastapi",
+    "uvicorn",
+    "slack-bolt",
+    "python-dotenv",
+    "google-api-python-client"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["capitalist_ai*"]

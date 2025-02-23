@@ -1,0 +1,16 @@
+README.md
+pyproject.toml
+src/capitalist_ai/__init__.py
+src/capitalist_ai/crew.py
+src/capitalist_ai/main.py
+src/capitalist_ai.egg-info/PKG-INFO
+src/capitalist_ai.egg-info/SOURCES.txt
+src/capitalist_ai.egg-info/dependency_links.txt
+src/capitalist_ai.egg-info/requires.txt
+src/capitalist_ai.egg-info/top_level.txt
+src/capitalist_ai/api/__init__.py
+src/capitalist_ai/api/main.py
+src/capitalist_ai/tools/__init__.py
+src/capitalist_ai/tools/google_docs_reader.py
+src/capitalist_ai/tools/google_sheets_reader.py
+src/capitalist_ai/tools/mongodb_helper.py

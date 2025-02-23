@@ -1,0 +1,8 @@
+crewai
+crewai_tools
+pymongo
+fastapi
+uvicorn
+slack-bolt
+python-dotenv
+google-api-python-client

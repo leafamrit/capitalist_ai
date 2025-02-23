@@ -1,0 +1,12 @@
+| Feature Name             | Growth | Engagement | Monetization | Delight | Hard-to-Copy | Margin-Enhancing | Complexity | Weightage Used | Final Score | Formula Used                                           | Justification                                        |
+|--------------------------|--------|------------|--------------|---------|--------------|------------------|------------|----------------|-------------|-------------------------------------------------------|-----------------------------------------------------|
+| Text to Video            | 4.5    | 4.0        | 4.2          | 5.0     | 4.8          | 4.5              | 3          | 40/30/30       | (0.4*4.5 + 0.3*4.0 + 0.3*4.2) - 3 = 4.04            | Essential feature for growth in video creation      |
+| URL to Video             | 4.0    | 3.8        | 4.0          | 4.5     | 4.6          | 4.1              | 2          | 40/30/30       | (0.4*4.0 + 0.3*3.8 + 0.3*4.0) - 2 = 4.38            | Directly enhances user engagement and growth         |
+| AI Video Editor          | 4.3    | 4.1        | 4.5          | 5.0     | 4.4          | 4.5              | 3          | 40/30/30       | (0.4*4.3 + 0.3*4.1 + 0.3*4.5) - 3 = 4.24            | Increases user satisfaction and retention            |
+| Image to Video           | 4.1    | 4.0        | 3.9          | 4.7     | 4.5          | 4.0              | 3          | 40/30/30       | (0.4*4.1 + 0.3*4.0 + 0.3*3.9) - 3 = 4.02            | Enhances content creativity, thus growing engagement  |
+| PPT to Video             | 3.8    | 3.7        | 4.3          | 4.2     | 4.0          | 3.9              | 2          | 40/30/30       | (0.4*3.8 + 0.3*3.7 + 0.3*4.3) - 2 = 3.84            | Good for corporate usage, directly supports monetization |
+| Smart Record             | 3.9    | 3.5        | 3.8          | 4.4     | 4.2          | 3.7              | 4          | 40/30/30       | (0.4*3.9 + 0.3*3.5 + 0.3*3.8) - 4 = 3.02            | Low engagement, higher complexity, thus lower priority |
+| ChatGPT Video Generator   | 5.0    | 4.5        | 4.0          | 5.0     | 4.8          | 4.6              | 4          | 40/30/30       | (0.4*5.0 + 0.3*4.5 + 0.3*4.0) - 4 = 4.64            | High growth potential, excellent engagement factor    |
+| AI Voice Generator        | 4.2    | 4.3        | 4.0          | 5.0     | 4.2          | 4.1              | 3          | 40/30/30       | (0.4*4.2 + 0.3*4.3 + 0.3*4.0) - 3 = 4.10            | Essential for increasing user value and satisfaction  |
+
+```

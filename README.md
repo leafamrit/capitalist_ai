@@ -1,0 +1,98 @@
+# Capitalist AI
+
+An AI-powered Slack bot that uses CrewAI to process inquiries and provide intelligent responses.
+
+## Slack Integration Setup
+
+### 1. Create a Slack App
+
+1. Go to [Slack API](https://api.slack.com/apps) and click "Create New App"
+2. Choose "From scratch" and give your app a name
+3. Select the workspace where you want to install the app
+
+### 2. Configure Bot Permissions
+
+1. In your app's settings, go to "OAuth & Permissions"
+2. Under "Scopes", add the following Bot Token Scopes:
+   - `app_mentions:read` - To read when the bot is mentioned
+   - `chat:write` - To send messages
+   - `im:history` - To read direct messages
+   - `im:write` - To send direct messages
+
+### 3. Enable Events
+
+1. Go to "Event Subscriptions" in your app settings
+2. Enable events
+3. Add your server URL + `/slack/events` as the Request URL
+   - Example: `https://your-domain.com/slack/events`
+   - For local development, use a tool like ngrok to create a public URL
+4. Subscribe to the following bot events:
+   - `app_mention` - When someone mentions your bot
+   - `message.im` - When someone sends a direct message to your bot
+
+### 4. Install the App
+
+1. Go to "Install App" in your app settings
+2. Click "Install to Workspace"
+3. Copy the Bot User OAuth Token (starts with `xoxb-`)
+
+### 5. Environment Variables
+
+Update your `.env` file with the following Slack-related variables:
+
+```env
+SLACK_BOT_TOKEN=xoxb-your-bot-token      # From OAuth & Permissions page
+SLACK_SIGNING_SECRET=your-signing-secret  # From Basic Information page
+```
+
+### 6. Running the Server
+
+Install the package with the new dependencies:
+
+```bash
+pip install -e .
+```
+
+Start the FastAPI server:
+
+```bash
+capitalist_ai serve
+```
+
+The server will start on port 8000 by default. You can change this by setting the `PORT` environment variable.
+
+## Usage
+
+The bot can be interacted with in two ways:
+
+1. **Direct Messages**: Simply send a message to the bot in a DM
+2. **Mentions**: Mention the bot in any channel it's in using `@BotName`
+
+The bot will process your inquiry using CrewAI and respond with the results.
+
+## Development
+
+### Local Testing with ngrok
+
+For local development, you'll need to make your local server accessible to Slack. Use ngrok:
+
+1. Install ngrok: https://ngrok.com/download
+2. Start your FastAPI server: `capitalist_ai serve`
+3. In a new terminal: `ngrok http 8000`
+4. Copy the ngrok HTTPS URL and update your Slack app's Event Subscription URL
+   - Example: `https://1234-your-ngrok-url.ngrok.io/slack/events`
+
+### Error Handling
+
+Check the server logs for detailed error messages. Common issues:
+
+- Invalid Slack credentials
+- Incorrect Event Subscription URL
+- Missing bot permissions
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
