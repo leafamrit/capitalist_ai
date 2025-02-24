@@ -116,7 +116,7 @@ def process_response(user_id: str, response: str) -> str:
         event_type='final_result'
     )
     
-    return str(result) + ".\n\n Visit https://leafamrit.github.io/cap_orator?conv_id=" + state["conversation_id"] + " to talk with me in more detail."
+    return str(result) + ".\n\n Visit https://capitalist-orator.vercel.app/?conv_id=" + state["conversation_id"] + " to talk with me in more detail."
 
 @app.post("/slack/events")
 async def endpoint(req: Request):
