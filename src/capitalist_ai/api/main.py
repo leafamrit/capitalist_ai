@@ -179,25 +179,55 @@ def handle_mention(event: Dict[str, Any], say: callable):
 def handle_message(event: Dict[str, Any], say: callable):
     """Handle direct messages to the bot"""
     # Ignore messages from the bot itself
-    # if event.get("user") and not event.get("bot_id"):
-    #     try:
-    #         user_id = event["user"]
-    #         message = event["text"]
-
-    #         # If this is the start of a conversation
-    #         if message.lower() in ["start", "begin", "hi", "hello"]:
-    #             # Initialize conversation
-    #             conversation_state[user_id] = {"step": 0, "data": {}}
-    #             first_question = get_next_question(user_id)
-    #             say(f"Hello! Let's get started. {first_question}")
-    #             return
-
-    #         # Process the response and get next action
-    #         response = process_response(user_id, message)
-    #         say(response)
+    if event.get("user") and not event.get("bot_id"):
+        try:
+            user_id = event["user"]
+            message = event["text"]
             
-    #     except Exception as e:
-    #         say(f"Sorry, I encountered an error: {str(e)}")
+            # Log the incoming message
+            mongodb.log_interaction(
+                user_id=user_id,
+                message=message,
+                event_type='user_message'
+            )
+
+            # If this is the start of a conversation
+            if message.strip().split(" ")[-1].lower() in ["start", "begin", "hi", "hello"]:
+                # Log conversation start
+                mongodb.log_interaction(
+                    user_id=user_id,
+                    message="Starting new conversation",
+                    event_type='conversation_start'
+                )
+                # Initialize conversation
+                conversation_state[user_id] = {"step": 0, "data": {}}
+                first_question = get_next_question(user_id)
+                say(f"Hello! Let's get started. {first_question}")
+                return
+
+            # Process the response and get next action
+            mongodb.log_interaction(
+                user_id=user_id,
+                message="Continuing conversation",
+                event_type='conversation_continue'
+            )
+            response = process_response(user_id, message)
+            # Log bot's response
+            mongodb.log_interaction(
+                user_id=user_id,
+                message=response,
+                event_type='bot_response'
+            )
+            say(response)
+            
+        except Exception as e:
+            # Log error
+            mongodb.log_interaction(
+                user_id=event.get("user", "unknown"),
+                message=str(e),
+                event_type='error'
+            )
+            say(f"Sorry, I encountered an error: {str(e)}")
 
 @app.get("/health")
 async def health_check():
