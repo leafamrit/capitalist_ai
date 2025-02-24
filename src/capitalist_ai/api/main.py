@@ -15,7 +15,7 @@ load_dotenv()
 # Initialize MongoDB helper
 mongodb = MongoDBHelper()
 
-def load_task_files(user_id):
+def load_task_files(conversation_id: str, user_id: str):
     """Read all task.md files from project root and store in MongoDB"""
     task_files = [f for f in os.listdir() if f.endswith('_task.md')]
     for task_file in task_files:
@@ -23,7 +23,7 @@ def load_task_files(user_id):
             with open(task_file, 'r') as f:
                 content = f.read()
                 task_name = task_file.replace('_task.md', '')
-                mongodb.store_task_output(user_id, task_name, content)
+                mongodb.store_task_output(conversation_id, user_id, task_name, content)
         except Exception as e:
             print(f"Error loading task file {task_file}: {str(e)}")
 
@@ -38,7 +38,7 @@ slack_app = App(
 handler = SlackRequestHandler(slack_app)
 
 # Conversation state management
-conversation_state = defaultdict(lambda: {"step": 0, "data": {}})
+conversation_state = defaultdict(lambda: {"step": 0, "data": {}, "conversation_id": None})
 
 # Define questions for the conversation flow
 QUESTIONS = [
@@ -56,6 +56,7 @@ def get_next_question(user_id: str) -> Optional[str]:
     state = conversation_state[user_id]
     # Log the current state
     mongodb.log_interaction(
+        conversation_id=state["conversation_id"],
         user_id=user_id,
         message=f"Current step: {state['step']}",
         event_type='step_check',
@@ -88,7 +89,7 @@ def process_response(user_id: str, response: str) -> str:
     collected_data = state["data"]
     
     # Store final conversation state before deletion
-    mongodb.store_conversation_state(user_id, state)
+    mongodb.store_conversation_state(state["conversation_id"], user_id, state)
     del conversation_state[user_id]
     
     crew_inputs = {
@@ -105,16 +106,17 @@ def process_response(user_id: str, response: str) -> str:
     # result = "k"
     
     # Load task files on startup
-    load_task_files(user_id)
+    load_task_files(state["conversation_id"], user_id)
 
     # Log the final result
     mongodb.log_interaction(
+        conversation_id=state["conversation_id"],
         user_id=user_id,
         message=str(result),
         event_type='final_result'
     )
     
-    return str(result) + ".\n\n Visit https://leafamrit.github.io/cap_orator/ to talk with me in more detail."
+    return str(result) + ".\n\n Visit https://leafamrit.github.io/cap_orator?conv_id=" + state["conversation_id"] + " to talk with me in more detail."
 
 @app.post("/slack/events")
 async def endpoint(req: Request):
@@ -132,6 +134,7 @@ def handle_mention(event: Dict[str, Any], say: callable):
             
             # Log the incoming message
             mongodb.log_interaction(
+                conversation_id=conversation_state[user_id].get("conversation_id"),
                 user_id=user_id,
                 message=message,
                 event_type='user_message'
@@ -139,20 +142,23 @@ def handle_mention(event: Dict[str, Any], say: callable):
 
             # If this is the start of a conversation
             if message.strip().split(" ")[-1].lower() in ["start", "begin", "hi", "hello"]:
+                # Initialize conversation with new conversation ID
+                conversation_id = mongodb.create_conversation(user_id)
+                conversation_state[user_id] = {"step": 0, "data": {}, "conversation_id": conversation_id}
                 # Log conversation start
                 mongodb.log_interaction(
+                    conversation_id=conversation_id,
                     user_id=user_id,
                     message="Starting new conversation",
                     event_type='conversation_start'
                 )
-                # Initialize conversation
-                conversation_state[user_id] = {"step": 0, "data": {}}
                 first_question = get_next_question(user_id)
                 say(f"Hello! Let's get started. {first_question}")
                 return
 
             # Process the response and get next action
             mongodb.log_interaction(
+                conversation_id=conversation_state[user_id].get("conversation_id"),
                 user_id=user_id,
                 message="Continuing conversation",
                 event_type='conversation_continue'
@@ -160,6 +166,7 @@ def handle_mention(event: Dict[str, Any], say: callable):
             response = process_response(user_id, message)
             # Log bot's response
             mongodb.log_interaction(
+                conversation_id=conversation_state[user_id].get("conversation_id"),
                 user_id=user_id,
                 message=response,
                 event_type='bot_response'
@@ -168,8 +175,11 @@ def handle_mention(event: Dict[str, Any], say: callable):
             
         except Exception as e:
             # Log error
+            error_user_id = event.get("user", "unknown")
+            error_conversation_id = conversation_state.get(error_user_id, {}).get("conversation_id")
             mongodb.log_interaction(
-                user_id=event.get("user", "unknown"),
+                conversation_id=error_conversation_id,
+                user_id=error_user_id,
                 message=str(e),
                 event_type='error'
             )
@@ -186,6 +196,7 @@ def handle_message(event: Dict[str, Any], say: callable):
             
             # Log the incoming message
             mongodb.log_interaction(
+                conversation_id=conversation_state[user_id].get("conversation_id"),
                 user_id=user_id,
                 message=message,
                 event_type='user_message'
@@ -193,20 +204,23 @@ def handle_message(event: Dict[str, Any], say: callable):
 
             # If this is the start of a conversation
             if message.strip().split(" ")[-1].lower() in ["start", "begin", "hi", "hello"]:
+                # Initialize conversation with new conversation ID
+                conversation_id = mongodb.create_conversation(user_id)
+                conversation_state[user_id] = {"step": 0, "data": {}, "conversation_id": conversation_id}
                 # Log conversation start
                 mongodb.log_interaction(
+                    conversation_id=conversation_id,
                     user_id=user_id,
                     message="Starting new conversation",
                     event_type='conversation_start'
                 )
-                # Initialize conversation
-                conversation_state[user_id] = {"step": 0, "data": {}}
                 first_question = get_next_question(user_id)
                 say(f"Hello! Let's get started. {first_question}")
                 return
 
             # Process the response and get next action
             mongodb.log_interaction(
+                conversation_id=conversation_state[user_id].get("conversation_id"),
                 user_id=user_id,
                 message="Continuing conversation",
                 event_type='conversation_continue'
@@ -214,6 +228,7 @@ def handle_message(event: Dict[str, Any], say: callable):
             response = process_response(user_id, message)
             # Log bot's response
             mongodb.log_interaction(
+                conversation_id=conversation_state[user_id].get("conversation_id"),
                 user_id=user_id,
                 message=response,
                 event_type='bot_response'
@@ -222,8 +237,11 @@ def handle_message(event: Dict[str, Any], say: callable):
             
         except Exception as e:
             # Log error
+            error_user_id = event.get("user", "unknown")
+            error_conversation_id = conversation_state.get(error_user_id, {}).get("conversation_id")
             mongodb.log_interaction(
-                user_id=event.get("user", "unknown"),
+                conversation_id=error_conversation_id,
+                user_id=error_user_id,
                 message=str(e),
                 event_type='error'
             )

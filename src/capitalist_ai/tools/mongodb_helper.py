@@ -17,11 +17,30 @@ class MongoDBHelper:
         self.conversation_collection = self.db['conversations']
         self.interaction_collection = self.db['interactions']
 
-    def store_conversation_state(self, user_id: str, state: Dict[str, Any]) -> str:
+    def create_conversation(self, user_id: str) -> str:
+        """
+        Create a new conversation and return its ID.
+        
+        Args:
+            user_id: Slack user ID
+            
+        Returns:
+            str: Conversation ID
+        """
+        document = {
+            'user_id': user_id,
+            'start_time': datetime.utcnow(),
+            'status': 'active'
+        }
+        result = self.conversation_collection.insert_one(document)
+        return str(result.inserted_id)
+
+    def store_conversation_state(self, conversation_id: str, user_id: str, state: Dict[str, Any]) -> str:
         """
         Store conversation state in MongoDB.
         
         Args:
+            conversation_id: Unique conversation identifier
             user_id: Slack user ID
             state: Current conversation state
             
@@ -29,15 +48,22 @@ class MongoDBHelper:
             str: ID of the stored document
         """
         document = {
+            'conversation_id': conversation_id,
             'user_id': user_id,
             'state': state,
             'timestamp': datetime.utcnow()
         }
         
-        result = self.conversation_collection.insert_one(document)
-        return str(result.inserted_id)
+        result = self.conversation_collection.update_one(
+            {'_id': conversation_id},
+            {'$set': {
+                'state': state,
+                'last_updated': datetime.utcnow()
+            }}
+        )
+        return conversation_id
 
-    def log_interaction(self, user_id: str, message: str, event_type: str, step: int = None) -> str:
+    def log_interaction(self, conversation_id: str, user_id: str, message: str, event_type: str, step: int = None) -> str:
         """
         Log user interaction in MongoDB.
         
@@ -51,6 +77,7 @@ class MongoDBHelper:
             str: ID of the stored document
         """
         document = {
+            'conversation_id': conversation_id,
             'user_id': user_id,
             'message': message,
             'event_type': event_type,
@@ -61,7 +88,7 @@ class MongoDBHelper:
         result = self.interaction_collection.insert_one(document)
         return str(result.inserted_id)
 
-    def store_task_output(self, user_id: str, task_name: str, output: str) -> str:
+    def store_task_output(self, conversation_id: str, user_id: str, task_name: str, output: str) -> str:
         """
         Store task output in MongoDB after converting to markdown.
         
@@ -80,6 +107,7 @@ class MongoDBHelper:
             md_output = f"# {task_name}\n\n{output}"
         
         document = {
+            'conversation_id': conversation_id,
             'user_id': user_id,
             'task_name': task_name,
             'output': md_output,
