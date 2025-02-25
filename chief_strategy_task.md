@@ -1,24 +1,18 @@
-1. **GLEE Strategic Goals for Pictory.ai:**
-   - Goal: Enhance customer satisfaction and product usability to achieve a GLEE score of 80%. This involves focusing on user-friendly features, continuous feedback loops, and proactive customer support.
+**GLEE (Goals, Levers, Engagement, Essentials)**: The strategic goals for Intercom should focus on enhancing customer experiences through advanced AI, improving omnichannel support, and increasing overall engagement with the platform. Priorities must be set on resolving customer issues promptly while reducing costs and enhancing satisfaction, ensuring personal touches in automated interactions.
 
-2. **GEM Strategic Goals for Pictory.ai:**
-   - Goal: Increase growth through improved activation and conversion rates, targeting a 40% activation rate and 10% conversion rate in the next 12 months.
-   - Goal: Enhance monetization strategies to achieve a stable MRR goal of $500,000 by optimizing the pricing model and evaluating upsell opportunities.
+**GEM (Growth, Engagement, Monetization)**: The primary GEM strategic goals for Intercom should prioritize three main pillars:
+1. **Growth**: The focus here should be on raising the Monthly Recurring Revenue (MRR), improving customer acquisition strategies, and particularly addressing the high churn rates. This involves exploring targeted marketing efforts, particularly towards small and medium businesses that might feel underserved.
+  
+2. **Engagement**: Strategies should aim to enhance the Activation Rate by refining customer onboarding processes, providing better training, and ensuring users can fully leverage the platform. Engagement can also be boosted by implementing feedback loops that personalize user experiences based on collected data.
 
-3. **DHM (Daily, Weekly, Monthly) Strategic Goals for Pictory.ai:**
-   - Daily: Track daily user engagement metrics and offer immediate customer support to improve user experience.
-   - Weekly: Conduct weekly reviews of retention rates and gather user feedback to drive incremental product improvements.
-   - Monthly: Monthly revenue analysis reports to evaluate MRR, churn rate, and adjust strategies accordingly.
+3. **Monetization**: Efforts should look at improving the Revenue Conversion Rate through better sales tactics, optimizing pricing strategies to reflect customer value, and ensuring that there is a strong alignment between sales and marketing efforts.
 
-**Prioritization of Business Goals:**
-1. **Growth:** Focus on increasing new customer signups and reducing churn through enhanced product offerings and customer support.
-2. **Engagement:** Strengthen user engagement through better onboarding processes, training, and ongoing interaction to improve retention rates.
-3. **Monetization:** Optimize monetization strategies, explore new revenue streams, and enhance existing products for better margins.
+**DHM (Desired Outcomes, How to Measure, Managerial Focus)**: Intercom's desired outcomes should include:
+- Reducing churn to under 10% (target is 8%).
+- Increasing the Activation Rate to 35%.
+- Growing the Revenue Conversion Rate to 10% within a set timeframe.
 
-**Proxy Metrics for GEM:**
-- Activation Rate Improvement: Target > 35% with a goal of reaching 40% in a specified timeframe.
-- Revenue Conversion Rate Improvement: Set a goal of reaching a consistent 10% conversion rate.
-- Churn Rate Reduction: Aim for an overall churn rate of < 10% through strategic interventions and enhanced customer feedback mechanisms.
+To measure these outcomes, the focus should involve tracking metrics like MRR growth, churn rates, engagement scores (measures of user interaction and satisfaction), and conversion rates from leads to paying customers.
 
-By implementing the above strategies using the GLEE, GEM, and DHM frameworks, Pictory.ai can position itself effectively in the AI video creation market, driving both immediate and long-term growth.
+These objectives align directly with Intercom's vision of being the leading AI-first customer service platform, and proactive steps can be set in place to ensure successful execution of the defined goals, particularly given the analysis of current competitor strengths and market gaps.
 ```

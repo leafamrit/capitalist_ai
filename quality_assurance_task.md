@@ -1,64 +1,41 @@
-**Pictory.ai Product Strategy Overview**
+EXECUTIVE SUMMARY OF INTERCOM PRODUCT STRATEGY
 
-## GLEE Strategic Goals
-- **Goal**: Enhance customer satisfaction and product usability with the aim of achieving a GLEE score of 80%. This involves:
-  - Focusing on user-friendly features.
-  - Establishing continuous feedback loops.
-  - Providing proactive customer support.
+## 1. GLEE Metrics Overview
+The GLEE framework focuses on enhancing customer experiences through:
+- **Goals**: Improve omnichannel support, prompt issue resolution, and customer satisfaction.
+- **Levers**: Utilize advanced AI technologies to streamline customer interactions and reduce operational costs.
+- **Engagement**: Increase user engagement with personalized automated responses.
+- **Essentials**: Maintain the human touch in automated responses, ensuring customer interactions feel personal and supportive.
 
-### Key GLEE Metrics:
-1. **User-Friendly Features**: Progress towards user-centered design.
-2. **Customer Feedback**: Systematic collection and analysis of user feedback.
-3. **Customer Support Satisfaction**: Metrics indicating the effectiveness of customer support interventions.
+## 2. GEM Ranking and Chief Strategy Reasoning
+### Growth
+Priority on raising Monthly Recurring Revenue (MRR) and reducing churn rates.
+- Emphasis on targeting small to medium-sized enterprises (SMEs) that are currently underserved.
+### Engagement
+Enhancing customer onboarding and developing feedback mechanisms to personalize experiences through AI.
+### Monetization
+Focus on improving the Revenue Conversion Rate, aligning sales efforts with customer needs.
 
----
+## 3. Feature Prioritization Table
+| Feature Name                                | Growth | Engagement | Monetization | Delight | Complexity | Final Score | Formula Used                               | Justification                                                  |
+|---------------------------------------------|--------|------------|--------------|---------|------------|-------------|--------------------------------------------|---------------------------------------------------------------|
+| AI customer agent                           | 4.5    | 4.2        | 3.9          | 4.8     | 3          | 4.44       | (0.4*GEM) + (0.3*DHM) - (0.3*Complexity) | Strong growth potential by reducing churn and enhancing support. |
+| Better positioning of messages on the LHS  | 3.8    | 5.0        | 3.2          | 4.5     | 2          | 4.27       | (0.3*GEM) + (0.4*DHM) - (0.3*Complexity) | Improves engagement and user experience, addressing customer needs. |
+| Usage based billing model                   | 3.9    | 4.2        | 5.0          | 4.0     | 3          | 4.25       | (0.35*GEM) + (0.35*DHM) - (0.3*Complexity) | Aligns pricing with user engagement, enhancing monetization strategies. |
 
-## GEM Strategic Goals
-- **Growth Objectives**: 
-  - Increase activation rates to 40% and conversion rates to 10% within the next 12 months.
-- **Monetization Strategies**: 
-  - Achieve a Monthly Recurring Revenue (MRR) of $500,000 by optimizing pricing models and exploring upsell opportunities.
+## 4. Complexity Scores 
+The Senior Engineering Manager Bot (RCB) outlined complexity factors associated with feature implementation. Higher complexity scores indicate more resource-intensive features that may delay deployment.
 
-### GEM Prioritization:
-1. **Growth** (focus on new customer signups and reducing churn).
-2. **Engagement** (improve user onboarding and retention).
-3. **Monetization** (optimize current strategies and explore new revenue streams).
-
-### Proxy Metrics for GEM:
-- **Activation Rate**: Target > 35%, aiming for 40%.
-- **Revenue Conversion Rate**: Goal of 10% conversion.
-- **Churn Rate**: Aim for an overall churn rate of < 10%.
-
----
-
-## Feature Prioritization Table
-| Feature Name                                                      | Growth | Engagement | Monetization | Complexity | Final Score | Formula Used                                             | Justification                                                  |
-|------------------------------------------------------------------|--------|------------|--------------|------------|-------------|----------------------------------------------------------|----------------------------------------------------------------|
-| Transform long-form videos to shorts                             | 4.5    | 4.2        | 3.8          | 3          | 4.32        | (0.4*GEM) + (0.3*DHM) - (0.3*Complexity)                | High demand for repurposing content effectively.                |
-| New & Improved AI-Based Video Summarizer for Uploaded Video      | 4.0    | 4.5        | 4.0          | 4          | 4.10        | (0.35*GEM) + (0.35*DHM) - (0.3*Complexity)               | Enhances usability and user engagement substantially.           |
-| Add transitions between scenes                                     | 3.8    | 4.0        | 3.2          | 2          | 4.15        | (0.4*GEM) + (0.3*DHM) - (0.3*Complexity)                | Improves video polishing which contributes to viewer experience. |
-| Support for Spanish Language                                       | 4.0    | 4.5        | 3.5          | 3          | 4.24        | (0.45*GEM) + (0.25*DHM) - (0.3*Complexity)                | Expands user base and accessibility significantly.               |
-
----
-
-## Complexity Scores
-- Capturing visibility into developmental efforts and resource allocation constraints to inform engineering capacity and delivery timelines.
-
----
-
-## Strategic Insights and Next Steps
+## 5. Strategic Insights and Next Steps
 ### Key Themes Emerging from the Market
-1. Increasing demand for AI-driven video content solutions.
-2. Need for seamless integration with existing platforms.
-  
+- Increased demand for AI-driven customer service solutions.
+- Shift towards personalized customer interactions as key differentiators.
 ### Potential Risks and Trade-offs
-1. Balancing resource allocation between innovative feature development and customer support.
-2. The risk of over-expanding feature sets without clear user demand leading to complexity and user confusion.
+- Balancing the speed of AI implementation against provision of quality service.
+- Staying relevant in a fast-evolving customer service market with new entrants.
+### Recommendations for Product Leadership
+- Invest in training and systems that refine customer onboarding to boost engagement metrics.
+- Continuously analyze user data to fine-tune AI interactions while ensuring personal touches aren’t lost.
 
-### Recommendations for Next Steps
-- Prioritize features that significantly contribute to growth and engagement.
-- Regularly review GEM metrics to adapt strategies in real-time.
-- Enhance onboarding processes to ensure higher activation and retention rates.
-
----
+By approaching strategy formulation through a structured lens focused on the integrated insights of GLEE, GEM, and customer needs, Intercom can position itself as a leader in AI-enhanced customer service solutions.
 ```

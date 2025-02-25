@@ -52,7 +52,7 @@ class CapitalistAI():
         self._init_tools()
         return Agent(
             config=self.agents_config['mrb'],
-            verbose=True,
+            verbose=False,
             allow_delegation=False,
             tools=[self.serper_dev_tool, self.website_webscrape_tool, self.website_websearch_tool]
         )
@@ -62,7 +62,7 @@ class CapitalistAI():
         self._init_tools()
         return Agent(
             config=self.agents_config['mab'],
-            verbose=True,
+            verbose=False,
             tools=[self.google_doc_reader, self.google_sheets_reader, self.website_webscrape_tool, self.website_websearch_tool, self.pricing_webscrape_tool, self.pricing_websearch_tool]
         )
     
@@ -71,7 +71,7 @@ class CapitalistAI():
         self._init_tools()
         return Agent(
             config=self.agents_config['csb'],
-            verbose=True,
+            verbose=False,
             allow_delegation=True,
             tools=[self.google_doc_reader, self.google_sheets_reader, self.website_webscrape_tool, self.website_websearch_tool]
         )
@@ -81,7 +81,7 @@ class CapitalistAI():
         self._init_tools()
         return Agent(
             config=self.agents_config['fsb'],
-            verbose=True,
+            verbose=False,
             allow_delegation=True,
             tools=[self.google_doc_reader, self.google_sheets_reader, self.website_webscrape_tool, self.website_websearch_tool, self.productbacklog_webscrape_tool, self.productbacklog_websearch_tool]
         )
@@ -91,7 +91,7 @@ class CapitalistAI():
         self._init_tools()
         return Agent(
             config=self.agents_config['rcb'],
-            verbose=True,
+            verbose=False,
             tools=[self.website_webscrape_tool, self.website_websearch_tool]
         )
     
@@ -100,7 +100,7 @@ class CapitalistAI():
         self._init_tools()
         return Agent(
             config=self.agents_config['pmb'],
-            verbose=True,
+            verbose=False,
             tools=[self.google_doc_reader, self.google_sheets_reader, self.serper_dev_tool, self.website_webscrape_tool, self.website_websearch_tool]
         )
 
@@ -109,7 +109,7 @@ class CapitalistAI():
         self._init_tools()
         return Agent(
             config=self.agents_config['qab'],
-            verbose=True,
+            verbose=False,
             tools=[self.google_doc_reader, self.google_sheets_reader]
         )
 
@@ -162,7 +162,7 @@ class CapitalistAI():
             agents=self.agents,
             tasks=self.tasks,
             process=Process.sequential,
-            verbose=True,
+            verbose=False,
         )
 
         return crew
