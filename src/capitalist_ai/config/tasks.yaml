@@ -1,67 +1,71 @@
 market_research_task:
   description: >
-    Analyze competitor data and industry reports to extract trends and key gaps for the business defined in the {positioning} doc.
+    **Begin by reviewing the {positioning} document to understand the business context.** Then, analyze competitor data and industry reports to extract relevant market trends and identify key competitive gaps for the business.
   expected_output: >
-    A report summarizing competitor strengths, industry trends, and key market gaps in {positioning} doc.
+    A market research report summarizing competitor strengths, industry trends, and key market gaps **relevant to the business defined in the {positioning} doc. This report should provide actionable insights to inform product strategy.**
   agent: mrb
   output_file: market_research_task.md
 
 metrics_analyzer_task:
   description: >
-    Review financial and KPI documents to identify weak GEM pillars and impact areas for Business defined in the {positioning} doc.
+    **To provide context, first review the {positioning} document to understand the business.** Then, review financial and KPI documents to identify weak GEM pillars and impact areas for the Business.
   expected_output: >
-    A breakdown of financial performance, KPI trends, and weak GEM pillars affecting business.
+    A detailed metrics analysis report that includes:
+    - A breakdown of financial performance and KPI trends.
+    - Identification of weak GEM pillars (Growth, Engagement, Monetization) affecting the business, with specific metrics indicating weakness.
+    - Actionable areas for improvement within each identified weak GEM pillar.
   agent: mab
   output_file: metrics_analyzer_task.md
 
 chief_strategy_task:
   description: >
-    Using insights from MRB and MAB, define high-level GLEE, GEM, and DHM strategic goals for the business mentioned in {positioning}.
+    **Leveraging insights from the market research report (MRB) and metrics analysis report (MAB),** define high-level strategic goals for the business mentioned in {positioning} using the GLEE, GEM, and DHM frameworks.
   expected_output: >
-    Define GLEE, GEM, and DHM using the exact definitions from the document.
-    Develop a strategy for {website} based on these models.
-    Rank the company’s priorities (Growth, Engagement, Monetization) and set proxy metrics for GEM.
-    Ensure all responses align 100% with the document, with no external interpretation.
+    Define GLEE (Get Big, Lead, Expand), GEM (Growth, Engagement, Monetization), and DHM (Delight, Hard-to-copy, Margin-enhancing) frameworks using the definitions **as understood and applied by you (Chief Strategy Officer agent).**
+    Develop a product strategy for {website} based on the GLEe, GEM, and DHM frameworks.
+    Rank the company's strategic priorities among the GEM pillars (Growth, Engagement, Monetization) and suggest **relevant proxy metrics for each GEM pillar to measure progress and success in each area.**
+    Ensure all strategic recommendations are consistent with your understanding and application of the GLEe, GEM, and DHM frameworks, avoiding external interpretations or assumptions beyond these frameworks and the insights from market research and metrics analysis.
   agent: csb
   output_file: chief_strategy_task.md
   context: [market_research_task, metrics_analyzer_task]
 
 feature_scoring_task:
   description: >
-    Evaluate feature ideas mentioned in the {productbacklog} using GEM and DHM frameworks, prioritizing features based on business impact and feasibility.
+    Evaluate feature ideas mentioned in the {productbacklog} using GEM and DHM frameworks, considering the strategic direction defined in the chief_strategy_task. Prioritize features based on business impact and feasibility.
   expected_output: >
     tasks: >
-    1. Analyze all 'under consideration' and 'planned' backlog items ({productbacklog}) to determine alignment with immediate business goals.
-    2. Assign GEM (Growth, Engagement, Monetization) and DHM (Delight, Hard-to-Copy, Margin-Enhancing) scores to each feature.
-    3. Collect effort scores from RCB (Senior Engineering Manager) and integrate them into the prioritization model.
-    4. Compute a final prioritization score using a weighted formula based on GEM, DHM, and complexity.
-    5. Generate and communicate the prioritized backlog, ensuring alignment with the Chief Strategy Officer’s vision.
+    1. Review the 'under consideration' and 'planned' backlog items from the {productbacklog} document to understand the feature set and determine alignment with immediate business goals and the overall product strategy. **Access the strategic direction from the context of the chief_strategy_task.**
+    2. Assign GEM (Growth, Engagement, Monetization) scores to each feature based on their potential impact on these pillars.
+    3. Assign DHM (Delight, Hard-to-copy, Margin-Enhancing) scores to each feature based on these criteria.
+    4. **Retrieve effort scores for each feature from the Senior Engineering Manager agent (RCB) - this information will be available in the task context.** Integrate these complexity scores into the prioritization model.
+    5. Compute a final prioritization score for each feature using a weighted formula that incorporates GEM scores, DHM scores, and complexity scores. **Dynamically adjust weightages based on the strategic priorities obtained from the context of the chief_strategy_task.**
+    6. Generate and communicate the prioritized backlog in a structured table format (as defined below), ensuring the prioritization rationale is clear and aligned with the Chief Strategy Officer's vision, **as available in the context from the chief_strategy_task.**
   expected_output: >
     A structured **table** with the following columns:
     - **Feature Name**: Name of the feature being evaluated.
     - **GEM Scores**: Growth, Engagement, Monetization scores (individually listed).
     - **DHM Scores**: Delight, Hard-to-Copy, Margin-Enhancing scores (individually listed).
     - **Complexity Score**: The effort score received from RCB.
-    - **Weightage Used**: The applied weight for each metric based on the business's strategic focus.
+    - **Weightage Used**: The applied weight for each framework component in the final score calculation (e.g., GEM weight, DHM weight, Complexity weight). **Clearly state the weight values (e.g., 40% GEM, 30% DHM, 30% Complexity).**
     - **Final Prioritization Score**: Computed score using a clear formula that includes GEM, DHM, and complexity.
-    - **Formula Breakdown**: Explanation of how the final score was computed.
+    - **Formula Used**:  Clearly state the formula used to calculate the final prioritization score. **Example: (0.4 * GEM Score) + (0.3 * DHM Score) - (0.3 * Complexity Score).**
     - **Justification**: Short reasoning for why the prioritization decision was made.
 
     Example Output:
     ```
-    | Feature Name       | Growth | Engagement | Monetization | Delight | Hard-to-Copy | Margin-Enhancing | Complexity | Weightage Used | Final Score | Formula Used | Justification |
-    |--------------------|--------|------------|--------------|---------|-------------|----------------|------------|---------------|-------------|--------------|--------------|
-    | AI Video Editing  |  4.5   |     4.2    |     3.8      |   5.0   |     4.8     |      4.2       |     3      | 40/30/30      |    4.12     | (0.4*GEM) + (0.3*DHM) - (0.3*Complexity) | Aligns with engagement goals |
+    | Feature Name       | Growth | Engagement | Monetization | Delight | Hard-to-Copy | Margin-Enhancing | Complexity | Weightage Used | Final Score | Formula Used                             | Justification                |
+    |--------------------|--------|------------|--------------|---------|--------------|------------------|------------|----------------|-------------|------------------------------------------|------------------------------|
+    | AI Video Editing   |  4.5   |     4.2    |     3.8      |   5.0   |     4.8      |      4.2         |     3      | 40/30/30       |    4.12     | (0.4*GEM) + (0.3*DHM) - (0.3*Complexity) | Aligns with engagement goals |
     ```
   agent: fsb
   output_file: feature_scoring_task.md
-  context: [chief_strategy_task]
+  context: [chief_strategy_task, reality_check_task] # Added reality_check_task to context as effort scores are needed
 
 reality_check_task:
   description: >
-    Assess the feasibility of the prioritized feature backlog, identifying any engineering constraints.
+    Assess the technical feasibility of the **prioritized feature list generated by the Feature Scoring Task**, identifying any engineering constraints and providing complexity scores.
   expected_output: >
-    TA structured **table** with the following columns:
+    TA structured **table** with the following columns, **assessing the technical feasibility of features from the prioritized feature list**:
     - **Feature Name**: Name of the feature being evaluated.
     - **Code Complexity**: How difficult the implementation is from a code perspective.
     - **System Dependencies**: Any core system changes, integrations, or API requirements.
@@ -70,13 +74,13 @@ reality_check_task:
     - **Testing Overhead**: Level of effort required for testing and QA.
     - **Collaboration Required**: Whether this feature requires input from other teams.
     - **Final Complexity Score**: A numeric score (1, 2, 3, 5, or 8) summarizing overall effort.
-    - **Justification**: Short reasoning for why the complexity score was assigned.
+    - **Justification**: Short reasoning for why the complexity score was assigned **(using the defined complexity scale: 1, 2, 3, 5, or 8).**
 
     Example Output:
     ```
-    | Feature Name       | Code Complexity | System Dependencies | Scalability Concerns | Security Risks | Testing Overhead | Collaboration Required | Final Complexity Score | Justification |
-    |--------------------|----------------|----------------------|----------------------|---------------|-----------------|----------------------|----------------------|--------------|
-    | AI Video Editing  | High           | API + Backend Change | High                 | Low           | Extensive        | Backend + Infra      | 5                    | Requires real-time processing |
+    | Feature Name       | Code Complexity | System Dependencies  | Scalability Concerns | Security Risks | Testing Overhead | Collaboration Required | Final Complexity Score | Justification                 |
+    |--------------------|-----------------|----------------------|----------------------|----------------|------------------|------------------------|------------------------|-------------------------------|
+    | AI Video Editing   | High            | API + Backend Change | High                 | Low            | Extensive        | Backend + Infra        | 5                      | Requires real-time processing |
     ```
   agent: rcb
   output_file: reality_check_task.md
@@ -117,31 +121,37 @@ reality_check_task:
 
 final_summary_task:
   description: >
-    1. Define and document the GLEE metrics for the company, summarizing responses from the other bots. Do not infer or create any new strategy or ideas.
-    2. Rank and document the GEM (Growth, Engagement, Monetization) priorities, including the **Chief Strategy Bot’s reasoning** for each.
+    1. Define and document the **GLEe strategies for each phase (Get Big, Lead, Expand) for the company**, summarizing responses from the other bots. Do not infer or create any new strategy or ideas.
+    2. Rank and document the GEM (Growth, Engagement, Monetization) priorities, including the **Chief Strategy Bot's reasoning** for each.
     3. Incorporate the **Feature Prioritization Table** from the Feature Scoring Bot (FSB), ensuring clarity on scoring methodology and formula usage.
-    4. Capture and summarize the **Complexity Scores** from the Senior Engineering Manager Bot (RCB) to provide visibility into effort constraints.
+    4. Incorporate and summarize the **key findings from the Reality Check Task**, including **Complexity Scores from the Senior Engineering Manager Bot (RCB) and product/market fit considerations from the Senior Product Manager (L2).** Provide visibility into effort constraints and potential market adoption concerns.
     5. Identify and highlight key **strategic insights and next steps** based on the interactions between bots.
     6. Format all findings into a **clean, well-structured document** with clear sections and headings
   expected_output: >
     A structured executive summary document containing:
-    - GLEE strategies
+    - **GLEe Strategies (Get Big, Lead, Expand)**
     - GEM ranking (including reasoning from the chief strategy officer)
     - Priority metrics used
     - Feature priortisation table from the feature scoring bot
-    - Strategic insights and next steps
-      - **[Key themes emerging from the market]**
-      - **[potential risks and trade-offs]**
-      - **[recommendations for next steps for the product leadership]**
+    - Strategic insights and next steps:
+      - **[Key themes emerging from the market research and competitive analysis (source: Market Research Task output)]**
+      - **[Potential risks and trade-offs identified in metrics analysis (source: Metrics Analyzer Task output) and reality checks (source: Reality Check Task output)]**
+      - **[Clear recommendations for next steps for the product leadership team, aligned with the overall strategic direction (source: Chief Strategy Task output) and feasibility assessments (source: Reality Check Task output)]**
   agent: pmb
   output_file: final_summary_task.md
-  context: [chief_strategy_task, feature_scoring_task]  
+  context: [market_research_task, metrics_analyzer_task, chief_strategy_task, feature_scoring_task, reality_check_task]
 
 quality_assurance_task:
   description: >
-    Quality check the final response given by the Senior Product Manager L3 (PMB)
+    Perform a quality check on the final product strategy document generated by the Senior Product Manager L3 (PMB), ensuring strategic soundness, logical consistency, and framework compliance.
   expected_output: >
-    A final response ready to be sent out. This response should consolidate the final strategy plan for the customer, incorporating all relevant feedback and information.
-    This response should also include a table with detailed metrics definition for each item in the product backlog that you got from the VP of Product Management.
+    A Quality Assurance Report that assesses the final product strategy document generated by the Senior Product Manager L3 (PMB). This report should evaluate:
+    - Strategic Soundness: Does the strategy align with overall business objectives and market context?
+    - Logical Consistency: Are the recommendations internally consistent and well-reasoned?
+    - Framework Compliance: Does the strategy correctly and consistently apply the GLEe, GEM, and DHM frameworks?
+    - Completeness: Does the document include all the required sections (GLEe Strategies, GEM Ranking, Priority Metrics, Feature Prioritization Table, Strategic Insights & Next Steps)?
+    - Clarity and Structure: Is the document well-formatted, clear, and easy to understand for product leadership?
+
+    The QA report should provide a concise summary of findings and highlight any areas needing improvement in the PMB's strategy document.
   agent: qab
   output_file: quality_assurance_task.md

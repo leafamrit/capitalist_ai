@@ -1,41 +1,37 @@
-EXECUTIVE SUMMARY OF INTERCOM PRODUCT STRATEGY
+| Feature Name       | Growth | Engagement | Monetization | Delight | Hard-to-Copy | Margin-Enhancing | Complexity | Weightage Used | Final Score | Formula Used | Justification |
+|--------------------|--------|------------|--------------|---------|--------------|------------------|------------|----------------|-------------|--------------|--------------|
+| Text to Video      |  4.5   |     4.2    |     4.0      |   5.0   |     4.5      |      4.0         |     3      | 40/30/30       |    4.35      | (0.4*GEM) + (0.3*DHM) - (0.3*Complexity) | High potential for user growth and engagement, closely aligned with monetization efforts. |
+| AI Video Editor     |  4.0   |     4.7    |     4.3      |   4.8   |     4.2      |      4.1         |     4      | 40/30/30       |    4.09      | (0.4*GEM) + (0.3*DHM) - (0.3*Complexity) | Significant impact on user engagement and overall productivity improvements. |
+| Video Highlight Extractor |  4.1   |     4.0    |     3.9      |   4.6   |     4.4      |      3.9         |     2      | 40/30/30       |    4.30      | (0.4*GEM) + (0.3*DHM) - (0.3*Complexity) | Enhances user retention and aligns with content marketers' needs. |
+| Audio Uploading     |  3.9   |     4.1    |     4.0      |   4.2   |     4.3      |      4.0         |     3      | 40/30/30       |    4.17      | (0.4*GEM) + (0.3*DHM) - (0.3*Complexity) | Boosts video accessibility and engagement in diverse formats. |
+| Customizable Templates |  4.5 | 4.5 | 4.2 | 4.5 | 3 | 4.40 | A major enhancement for user customization, driving higher engagement. |
 
-## 1. GLEE Metrics Overview
-The GLEE framework focuses on enhancing customer experiences through:
-- **Goals**: Improve omnichannel support, prompt issue resolution, and customer satisfaction.
-- **Levers**: Utilize advanced AI technologies to streamline customer interactions and reduce operational costs.
-- **Engagement**: Increase user engagement with personalized automated responses.
-- **Essentials**: Maintain the human touch in automated responses, ensuring customer interactions feel personal and supportive.
+**Executive Summary Document**
 
-## 2. GEM Ranking and Chief Strategy Reasoning
-### Growth
-Priority on raising Monthly Recurring Revenue (MRR) and reducing churn rates.
-- Emphasis on targeting small to medium-sized enterprises (SMEs) that are currently underserved.
-### Engagement
-Enhancing customer onboarding and developing feedback mechanisms to personalize experiences through AI.
-### Monetization
-Focus on improving the Revenue Conversion Rate, aligning sales efforts with customer needs.
+## 1. GLEE Metrics
+- GLEE stands for Get Big, Lead, Expand, Expand, Expand.
+- The product vision should look like this: 
+  1. Get Big on short-form video content 
+  2. Lead in AI video creation and editing solutions 
+  3. Expand into analytics and insights tools for users
 
-## 3. Feature Prioritization Table
-| Feature Name                                | Growth | Engagement | Monetization | Delight | Complexity | Final Score | Formula Used                               | Justification                                                  |
-|---------------------------------------------|--------|------------|--------------|---------|------------|-------------|--------------------------------------------|---------------------------------------------------------------|
-| AI customer agent                           | 4.5    | 4.2        | 3.9          | 4.8     | 3          | 4.44       | (0.4*GEM) + (0.3*DHM) - (0.3*Complexity) | Strong growth potential by reducing churn and enhancing support. |
-| Better positioning of messages on the LHS  | 3.8    | 5.0        | 3.2          | 4.5     | 2          | 4.27       | (0.3*GEM) + (0.4*DHM) - (0.3*Complexity) | Improves engagement and user experience, addressing customer needs. |
-| Usage based billing model                   | 3.9    | 4.2        | 5.0          | 4.0     | 3          | 4.25       | (0.35*GEM) + (0.35*DHM) - (0.3*Complexity) | Aligns pricing with user engagement, enhancing monetization strategies. |
+## 2. GEM Priorities
+### Ranking of GEM Priorities:
+1. **Growth:** Focusing on user acquisition through innovative features and strategic partnerships.
+2. **Engagement:** Enhancing user experience and retention by improving existing features and introducing new functionalities that increase time spent on the platform.
+3. **Monetization:** Exploring diverse revenue streams and optimizing for existing ones, ensuring alignment with user needs and market trends.
 
-## 4. Complexity Scores 
-The Senior Engineering Manager Bot (RCB) outlined complexity factors associated with feature implementation. Higher complexity scores indicate more resource-intensive features that may delay deployment.
+## 3. Potential Improvement Areas
+- Enhance user onboarding and educational materials to improve activation and retention, directly addressing churn.
+- Redefine pricing structures for clarity, potentially tiering offerings that align better with user needs.
+- Bolster the customer success program to proactively address user pain points before they escalate to churn risk.
+- Invest in product analytics to better understand user interaction and satisfaction post-signup, helping to adjust strategies effectively.
+
+## 4. KPI Trends
+- There is a visible improvement in activation and churn rates, but conversion and retention need critical focus areas for future strategies.
 
 ## 5. Strategic Insights and Next Steps
-### Key Themes Emerging from the Market
-- Increased demand for AI-driven customer service solutions.
-- Shift towards personalized customer interactions as key differentiators.
-### Potential Risks and Trade-offs
-- Balancing the speed of AI implementation against provision of quality service.
-- Staying relevant in a fast-evolving customer service market with new entrants.
-### Recommendations for Product Leadership
-- Invest in training and systems that refine customer onboarding to boost engagement metrics.
-- Continuously analyze user data to fine-tune AI interactions while ensuring personal touches aren’t lost.
-
-By approaching strategy formulation through a structured lens focused on the integrated insights of GLEE, GEM, and customer needs, Intercom can position itself as a leader in AI-enhanced customer service solutions.
+- Conduct thorough user research to identify pain points and feature requests.
+- Evaluate feedback from current product features to inform future iterations.
+- Prioritize collaborations with other tech platforms to enhance feature offerings.
 ```
