@@ -102,14 +102,14 @@ def process_response(user_id: str, response: str) -> str:
     }
 
     ## TESTING:
-    crew_inputs = {
-        "positioning": "https://docs.google.com/document/d/1kayH3AXm915h-ZI6Wp8juRQLZ225V2BRClAJInofz-0/edit?usp=sharing",
-        "productbacklog": "https://feedback.pictory.ai/roadmap",
-        "KPIdoc": "https://docs.google.com/spreadsheets/d/1kN3cFKFdWawH2SGE9pQSh8zmO6zsjewQWByI9Bx2FkQ/edit?usp=sharing",
-        "investor_meeting_notes": "https://docs.google.com/document/d/1nbHBmsLFGyLtD_DzG5qlx2T1nQjg_emDwfi5oYwjlUo/edit?usp=sharing",
-        "website": "https://pictory.ai/",
-        "pricing": "https://pictory.ai/pricing"
-    }
+    # crew_inputs = {
+    #     "positioning": "https://docs.google.com/document/d/1kayH3AXm915h-ZI6Wp8juRQLZ225V2BRClAJInofz-0/edit?usp=sharing",
+    #     "productbacklog": "https://feedback.pictory.ai/roadmap",
+    #     "KPIdoc": "https://docs.google.com/spreadsheets/d/1kN3cFKFdWawH2SGE9pQSh8zmO6zsjewQWByI9Bx2FkQ/edit?usp=sharing",
+    #     "investor_meeting_notes": "https://docs.google.com/document/d/1nbHBmsLFGyLtD_DzG5qlx2T1nQjg_emDwfi5oYwjlUo/edit?usp=sharing",
+    #     "website": "https://pictory.ai/",
+    #     "pricing": "https://pictory.ai/pricing"
+    # }
 
     # Create a new CapitalistAI instance with all collected data
     result = CapitalistAI(crew_inputs).crew().kickoff(inputs=crew_inputs)
