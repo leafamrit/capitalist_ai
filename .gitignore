@@ -3,4 +3,7 @@
 __pycache__/
 .DS_Store
 
+# Explicitly ignore the specific file
+cmdandfn-gcpkey.json
+# Also keep the pattern for any similar files
 cmdandfn.*json

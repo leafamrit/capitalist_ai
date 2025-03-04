@@ -28,7 +28,7 @@ class GoogleDocReader(BaseTool):
         """Get Google API credentials from service account."""
         try:
             return service_account.Credentials.from_service_account_file(
-                'cmdandfn-74677504db39.json',
+                'cmdandfn-gcpkey.json',
                 scopes=['https://www.googleapis.com/auth/documents.readonly']
             )
         except Exception as e:
