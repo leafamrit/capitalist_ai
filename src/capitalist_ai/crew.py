@@ -5,6 +5,7 @@ from .tools.google_docs_reader import GoogleDocReader
 from .tools.google_sheets_reader import GoogleSheetsReader
 from .tools.mongodb_helper import MongoDBHelper
 from functools import wraps
+from crewai.knowledge.source.text_file_knowledge_source import TextFileKnowledgeSource
 
 @CrewBase
 class CapitalistAI():
@@ -12,6 +13,9 @@ class CapitalistAI():
 
     agents_config = 'config/agents.yaml'
     tasks_config = 'config/tasks.yaml'
+    text_source = TextFileKnowledgeSource(
+        file_paths=["Product Strategy Executive Summary.md"]
+    )
 
     def __init__(self, crew_inputs):
         """Initialize CapitalistAI with lazy-loaded tools."""
@@ -53,6 +57,7 @@ class CapitalistAI():
         return Agent(
             config=self.agents_config['mrb'],
             verbose=True,
+            memory = True,
             allow_delegation=False,
             tools=[self.serper_dev_tool, self.website_webscrape_tool, self.website_websearch_tool]
         )
@@ -73,8 +78,10 @@ class CapitalistAI():
             config=self.agents_config['csb'],
             verbose=True,
             allow_delegation=True,
-            tools=[self.google_doc_reader, self.google_sheets_reader, self.website_webscrape_tool, self.website_websearch_tool]
-        )
+            tools=[self.google_doc_reader, self.google_sheets_reader, self.website_webscrape_tool, self.website_websearch_tool],
+            knowledge_sources=[self.text_source]
+            )
+            
     
     @agent
     def fsb(self) -> Agent:

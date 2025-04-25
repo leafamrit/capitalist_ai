@@ -42,12 +42,12 @@ conversation_state = defaultdict(lambda: {"step": 0, "data": {}, "conversation_i
 
 # Define questions for the conversation flow
 QUESTIONS = [
-    "please provide the URL to your brand positioning document",
-    "please provide the URL to your product backlog document",
-    "please provide the URL to your KPI document",
-    "please provide the URL to your investor meeting notes",
-    "please provide the URL to your website",
-    "please provide the URL to your pricing page"
+    "I want to understand your product's vision first. Please share the following: \n - Vision of the company \n - Current ICP \n - Current strategy to break the market \n - Next big thing you're planning \n You could share the link to a Google Doc too.",
+    "Okay, now that that's done. Let's look at your current product backlog. You could share the backlog items here OR send a URL for Google Docs or Sheets.",
+    "Can you please share your current definitions and numbers for Top of funnel Growth, Activation, Conversion, Paid user growth, Retention.",
+    "If you have any, please share meeting notes from your last 2-3 investor meetings. This will help me understand some pain points on business end.",
+    "Please share the link to your website.",
+    "Please share the link to your pricing page."
 ]
 
 def get_next_question(user_id: str) -> Optional[str]:
@@ -101,17 +101,19 @@ def process_response(user_id: str, response: str) -> str:
         "pricing": collected_data["question_5"]
     }
 
-    ## TESTING:
-    # crew_inputs = {
-    #     "positioning": "https://docs.google.com/document/d/1kayH3AXm915h-ZI6Wp8juRQLZ225V2BRClAJInofz-0/edit?usp=sharing",
-    #     "productbacklog": "https://feedback.pictory.ai/roadmap",
-    #     "KPIdoc": "https://docs.google.com/spreadsheets/d/1kN3cFKFdWawH2SGE9pQSh8zmO6zsjewQWByI9Bx2FkQ/edit?usp=sharing",
-    #     "investor_meeting_notes": "https://docs.google.com/document/d/1nbHBmsLFGyLtD_DzG5qlx2T1nQjg_emDwfi5oYwjlUo/edit?usp=sharing",
-    #     "website": "https://pictory.ai/",
-    #     "pricing": "https://pictory.ai/pricing"
-    # }
+    # TESTING:
+    crew_inputs = {
+        "positioning": "https://docs.google.com/document/d/1DLkRCTZtewTgfnjS4LYe6zAURHBNDeWod0JcoMQ2WVg/edit?usp=sharing",
+        "productbacklog": "https://docs.google.com/spreadsheets/d/1HCpdm3j7FMJvLIi1BozUPmHZR3F5cZEx0OUkpm9mM8g/edit?usp=sharing",
+        "KPIdoc": "https://docs.google.com/spreadsheets/d/1ZmOTZ4mG1fo_MOCY4P6-SOgaW-veJXR1QO8yEqjCETI/edit?usp=sharing",
+        "investor_meeting_notes": "https://docs.google.com/document/d/1nbHBmsLFGyLtD_DzG5qlx2T1nQjg_emDwfi5oYwjlUo/edit?usp=sharing",
+        "website": "https://pictory.ai/",
+        "pricing": "https://pictory.ai/pricing"
+    }
 
     # Create a new CapitalistAI instance with all collected data
+    # Add an 'inquiry' key to crew_inputs as it's expected by the kickoff method
+    crew_inputs['inquiry'] = "Analyze the provided documents and generate a product strategy"
     result = CapitalistAI(crew_inputs).crew().kickoff(inputs=crew_inputs)
     # result = "k"
     
@@ -151,7 +153,7 @@ def handle_mention(event: Dict[str, Any], say: callable):
             )
 
             # If this is the start of a conversation
-            if message.strip().split(" ")[-1].lower() in ["start", "begin", "hi", "hello"]:
+            if message.strip().split(" ")[-1].lower() in ["start", "begin", "hi", "hello", "hey"]:
                 # Initialize conversation with new conversation ID
                 conversation_id = mongodb.create_conversation(user_id)
                 conversation_state[user_id] = {"step": 0, "data": {}, "conversation_id": conversation_id}
